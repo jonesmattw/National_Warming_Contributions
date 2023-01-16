@@ -3,6 +3,11 @@
 To run the code for the first time, follow these steps.
 
 ## Step 1: Clone GitHub Repo
+
+Navigate to your chosen ROOT directory.
+
+git clone https://github.com/jonesmattw/National_Warming_Contributions.git
+
 ## Step 2: Download & Unzip Input Data from Zenodo Repo
 
 https://zenodo.org/record/7076347
