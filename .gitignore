@@ -1,0 +1,29 @@
+# Unnecessary R Files
+*.Rproj
+*.RData
+*.Rhistory
+.Rproj.user
+
+# Unnecessary Mac Files
+._*
+
+# Unnecessary PyCharm Files
+*.idea
+
+# Data files
+*.zip
+
+# Input Data (all to be provided via the Zenodo data repo)
+/Input/
+
+# Content of Output Directories (but directories still created)
+/Output/EMISSIONS/*
+/Output/GMST/*
+/Output/PUBLIC_DATA/*
+/Output/PLOTS/*
+
+# Content of Output Directories
+*/_Archive/
+*/_Misc/
+
+
