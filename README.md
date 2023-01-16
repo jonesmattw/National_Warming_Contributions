@@ -22,9 +22,13 @@ ROOT <- "/Volumes/LaCie8/National_Warming_Contributions/"
 Make the output directory structure. You can run the following code (linux/Mac) to create directories as required. Don't forget to set your own root.
 
 $ROOT='PATH/TO/YOUR/ROOT/DIRECTORY'
+
 mkdir $ROOT/EMISSIONS
+
 mkdir $ROOT/GMST
+
 mkdir $ROOT/PUBLIC_DATA
+
 mkdir $ROOT/PLOTS
 
 ## Step 5: Run code sequentially using GO.R
