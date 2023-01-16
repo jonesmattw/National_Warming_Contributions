@@ -12,7 +12,9 @@ git clone https://github.com/jonesmattw/National_Warming_Contributions.git
 
 Download Input.zip from https://zenodo.org/record/7076347
 
-Unzip the Input files should be located at PATH/TO/YOUR/ROOT/Input
+Save Input.zip to /PATH/TO/YOUR/ROOT/Input.zip
+
+Unzip the input files in place. After unzipping, the files should be located at /PATH/TO/YOUR/ROOT/Input
 
 The unzipped directory tree will already be organised as required for code to run.
 
@@ -20,13 +22,13 @@ The unzipped directory tree will already be organised as required for code to ru
 
 Set the ROOT variable as desired.
 
-ROOT <- "PATH/TO/YOUR/ROOT/"
+ROOT <- "/PATH/TO/YOUR/ROOT/"
 
 ## Step 4: Make the output directory tree 
 
 Make the output directory structure. You can run the following code (linux/Mac) to create directories as required. Don't forget to set your own root.
 
-$ROOT='PATH/TO/YOUR/ROOT/DIRECTORY'
+$ROOT='/PATH/TO/YOUR/ROOT/DIRECTORY'
 
 mkdir $ROOT/EMISSIONS
 
