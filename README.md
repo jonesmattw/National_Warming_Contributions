@@ -4,25 +4,25 @@ To run the code for the first time, follow these steps.
 
 ## Step 1: Clone GitHub Repo
 
-Navigate to your chosen ROOT directory.
+Navigate to your chosen ROOT directory, then run:
 
 git clone https://github.com/jonesmattw/National_Warming_Contributions.git
 
 ## Step 2: Download & Unzip Input Data from Zenodo Repo
 
-https://zenodo.org/record/7076347
+Download Input.zip from https://zenodo.org/record/7076347
 
-Unzipped Input file should be at {ROOT}/Input
+Unzip the Input files should be located at PATH/TO/YOUR/ROOT/Input
 
-The sub-directory tree will be as required for code to run.
+The unzipped directory tree will already be organised as required for code to run.
 
 ## Step 3: Set Root Directory in SETUP.R
 
-Replace the following line as appropriate:
+Set the ROOT variable as desired.
 
-ROOT <- "/Volumes/LaCie8/National_Warming_Contributions/"
+ROOT <- "PATH/TO/YOUR/ROOT/"
 
-## Step 4: Set Root Directory in SETUP.R
+## Step 4: Make the output directory tree 
 
 Make the output directory structure. You can run the following code (linux/Mac) to create directories as required. Don't forget to set your own root.
 
