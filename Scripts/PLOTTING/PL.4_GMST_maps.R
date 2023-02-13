@@ -175,8 +175,8 @@ df_thisplot <- country_borders %>%
   mutate(Data = Data * 100) %>% # to % from fraction
   subset(!is.na(Data))
 
-scaling_factor = 1.5
-breaks = c(seq(0.5,1,0.25),seq(2.5,15,2.5)) * scaling_factor
+scaling_factor = 1
+breaks = c(0.5,1,2.5,5,7.5,10,15,20,25) * scaling_factor
 labels = breaks / scaling_factor
 
 thisplot <- ggplot() + 
