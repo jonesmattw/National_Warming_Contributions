@@ -153,8 +153,8 @@ fig_EMISSIONS <- ggplot() +
   
   # Customise the scales
   scale_y_continuous(expand=c(0,NA)) +
-  scale_x_continuous(limits = year_limits(start_year, final_year), 
-                     breaks = year_breaks(start_year, final_year),
+  scale_x_continuous(limits = year_limits(ref_year, final_year), 
+                     breaks = year_breaks(ref_year, final_year),
                      expand = c(0,0,0,0)) +
   scale_colour_manual(values = colour_custom) + 
   #scale_linetype_manual(values = linetype_custom) + 
@@ -211,8 +211,8 @@ fig_EMISSIONS_CUMULATIVE <- ggplot() +
   
   # Customise the scales
   scale_y_continuous(expand=c(0,NA), labels = comma) +
-  scale_x_continuous(limits = year_limits(start_year, final_year), 
-                     breaks = year_breaks(start_year, final_year),
+  scale_x_continuous(limits = year_limits(ref_year, final_year), 
+                     breaks = year_breaks(ref_year, final_year),
                      expand = c(0,0,0,0)) +
   scale_colour_manual(values = colour_custom) + 
   # scale_linetype_manual(values = linetype_custom) + 

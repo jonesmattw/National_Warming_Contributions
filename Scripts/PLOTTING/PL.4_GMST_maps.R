@@ -223,7 +223,7 @@ df_thisplot <- country_borders %>%
   subset(!is.na(Data))
 
 scaling_factor = 100
-breaks = c(0.0125, 0.025, 0.05, 0.1, 0.2) * scaling_factor
+breaks = c(0.01, 0.02, 0.03, 0.04, 0.05, 0.1, 0.2, 0.25) * scaling_factor
 labels = breaks / scaling_factor
 
 thisplot <- ggplot() + 

@@ -2,8 +2,8 @@
 ROOT <- "/Volumes/LaCie8/National_Warming_Contributions/"
 
 # Set the start year 
-start_year <- 1850
-ref_year <- start_year + 20 # 20 prior years required for the GWP* calculation for methane
+ref_year <- 1850 
+start_year <- ref_year - 20 # 20 prior years required for the GWP* calculation for methane
 final_year <- 2021
 
 # Set the TCRE value (express in unit °C per PgC)
