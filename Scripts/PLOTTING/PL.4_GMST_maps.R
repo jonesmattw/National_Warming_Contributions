@@ -17,16 +17,15 @@ library(sf)
 
 wd_parent <- str_split(getwd(), "/")[[1]]
 wd_parent <- wd_parent[length(wd_parent)]
-if (wd_parent == "National_Warming_Contributions") {
-  # if current wd is /National_Warming_Contributions/
-  source("./Scripts/SETUP.R") # get ROOT
-} else if (wd_parent == "Scripts") { 
-  # if current wd is /National_Warming_Contributions/Scripts/
-  source("./SETUP.R") # get ROOT
+while (!(wd_parent == "National_Warming_Contributions")){
+  setwd("..")
+  wd_parent <- str_split(getwd(), "/")[[1]]
+  wd_parent <- wd_parent[length(wd_parent)]
 }
+source("./Scripts/SETUP.R")
 setwd(ROOT)
 
-source(paste0(ROOT, "Scripts/HELPERS.R"))
+source(paste0(ROOT, "../Scripts/HELPERS.R"))
 
 ####
 # Prep
@@ -35,8 +34,11 @@ source(paste0(ROOT, "Scripts/HELPERS.R"))
 # Directories
 
 INDIR <- paste0(ROOT, "Output/GMST/")
-SHAPEDIR <- paste0(ROOT, "Input/ISO3_borders/")
 OUTDIR <- paste0(ROOT, "Output/PLOTS/")
+SHAPEDIR <- paste0(ROOT, "Input/ISO3_borders/")
+if (!dir.exists(OUTDIR)) {
+  dir.create(OUTDIR, recursive=TRUE)
+}
 
 #//////////////////////////////////////////////////////////////////////////////#
 #### Load GMST Data ####
@@ -176,7 +178,7 @@ df_thisplot <- country_borders %>%
   subset(!is.na(Data))
 
 scaling_factor = 1
-breaks = c(0.5,1,2.5,5,7.5,10,15,20,25) * scaling_factor
+breaks = c(0.5,1,2.5,5,7.5,10,15,20) * scaling_factor
 labels = breaks / scaling_factor
 
 thisplot <- ggplot() + 
@@ -188,7 +190,8 @@ thisplot <- ggplot() +
   scale_fill_gradientn(colours = colour_ramp_hotcold, 
                     trans = "pseudo_log", 
                     breaks = breaks,
-                    labels = labels) +
+                    labels = labels
+                    ) +
   #scale_fill_manual(values = colour_ramp_hotcold, na.translate = F) +
   xlab("Longitude (°)") + ylab("Latitude (°)") +
   guides(
@@ -201,13 +204,12 @@ thisplot <- ggplot() +
   facet_wrap(.~Year, ncol = 1, labeller = labeller(Year = year_labeller)) +
   map_theme
 
-filename = paste0(OUTDIR, "Map_GMST_contributions_ref", ref_year, "_map")
+filename = paste0(OUTDIR, "Map_GMST_contributions_ref", ref_year)
 for (extension in c("pdf", "png")) {
   ggsave(paste0(filename, ".", extension),
          height = 12, width = 10,
          plot = thisplot, device = extension, dpi = 400)
 }
-
 
 #//////////////////////////////////////////////////////////////////////////////#
 #### PLOT: CONTRIBUTION *C ####
@@ -223,7 +225,7 @@ df_thisplot <- country_borders %>%
   subset(!is.na(Data))
 
 scaling_factor = 100
-breaks = c(0.01, 0.02, 0.03, 0.04, 0.05, 0.1, 0.2, 0.25) * scaling_factor
+breaks = c(0.01, 0.02, 0.03, 0.04, 0.05, 0.1, 0.2) * scaling_factor
 labels = breaks / scaling_factor
 
 thisplot <- ggplot() + 
@@ -248,14 +250,13 @@ thisplot <- ggplot() +
     facet_wrap(.~Year, ncol = 1, labeller = labeller(Year = year_labeller)) +
   map_theme
 
-filename = paste0(OUTDIR, "Map_GMST_ref", ref_year, "_map")
+filename = paste0(OUTDIR, "Map_GMST_ref", ref_year)
 for (extension in c("pdf", "png")) {
   ggsave(paste0(filename, ".", extension),
          height = 12, width = 10,
          plot = thisplot, device = extension, dpi = 400)
 }
  
-
 
 #//////////////////////////////////////////////////////////////////////////////#
 #### PLOT: CONTRIBUTION FROM CO2 ####
@@ -301,7 +302,7 @@ thisplot <- ggplot() +
     facet_wrap(.~Year, ncol = 1, labeller = labeller(Year = year_labeller)) +
   map_theme
 
-filename = paste0(OUTDIR, "Map_GMST_CO2fraction_ref", ref_year, "_map")
+filename = paste0(OUTDIR, "Map_GMST_CO2fraction_ref", ref_year)
 for (extension in c("pdf", "png")) {
   ggsave(paste0(filename, ".", extension),
          height = 12, width = 10,
@@ -353,7 +354,7 @@ thisplot <- ggplot() +
     facet_wrap(.~Year, ncol = 1, labeller = labeller(Year = year_labeller)) +
   map_theme
 
-filename = paste0(OUTDIR, "Map_GMST_LULUCFfraction_ref", ref_year, "_map")
+filename = paste0(OUTDIR, "Map_GMST_LULUCFfraction_ref", ref_year)
 for (extension in c("pdf", "png")) {
   ggsave(paste0(filename, ".", extension),
          height = 12, width = 10,

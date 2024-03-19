@@ -11,13 +11,12 @@ library(dplyr)
 
 wd_parent <- str_split(getwd(), "/")[[1]]
 wd_parent <- wd_parent[length(wd_parent)]
-if (wd_parent == "National_Warming_Contributions") {
-  # if current wd is /National_Warming_Contributions/
-  source("./Scripts/SETUP.R") # get ROOT
-} else if (wd_parent == "Scripts") { 
-  # if current wd is /National_Warming_Contributions/Scripts/
-  source("./SETUP.R") # get ROOT
+while (!(wd_parent == "National_Warming_Contributions")){
+  setwd("..")
+  wd_parent <- str_split(getwd(), "/")[[1]]
+  wd_parent <- wd_parent[length(wd_parent)]
 }
+source("./Scripts/SETUP.R")
 setwd(ROOT)
 
 #//////////////////////////////////////////////////////////////////////////////#
@@ -26,6 +25,9 @@ setwd(ROOT)
 
 INDIR <- paste0(ROOT, "Output/GMST/")
 OUTDIR <- paste0(ROOT, "Output/GMST/")
+if (!dir.exists(OUTDIR)) {
+  dir.create(OUTDIR, recursive=TRUE)
+}
 
 df_GMST <- read.csv(paste0(INDIR, "GMST_ref", ref_year, ".csv"))
 
@@ -88,7 +90,7 @@ write.csv(df_EMISSIONS_CUMULATIVE,
 INDIR <- paste0(ROOT, "Output/EMISSIONS/")
 OUTDIR <- paste0(ROOT, "Output/EMISSIONS/")
 
-df_EMISSIONS_CO2e <- read.csv(paste0(INDIR, "EMISSIONS_CUMULATIVE_CO2e100_GWPstar.csv"))
+df_EMISSIONS_CO2e <- read.csv(paste0(INDIR, "EMISSIONS_CUMULATIVE_ref", ref_year, "_CO2e100_GWPstar.csv"))
 
 df_EMISSIONS_CO2e.GLOBAL <- df_EMISSIONS_CO2e %>% subset(ISO3 == "GLOBAL")
 
@@ -108,6 +110,6 @@ df_EMISSIONS_CO2e <- df_EMISSIONS_CO2e %>%
 ## SAVE ##
 
 write.csv(df_EMISSIONS_CO2e,
-          paste0(OUTDIR, "EMISSIONS_CUMULATIVE_CO2e100_GWPstar_contributions.csv"),
+          paste0(OUTDIR, "EMISSIONS_CUMULATIVE_ref", ref_year, "_CO2e100_GWPstar_contributions.csv"),
           row.names = F)
 

@@ -11,13 +11,12 @@ library(dplyr)
 
 wd_parent <- str_split(getwd(), "/")[[1]]
 wd_parent <- wd_parent[length(wd_parent)]
-if (wd_parent == "National_Warming_Contributions") {
-  # if current wd is /National_Warming_Contributions/
-  source("./Scripts/SETUP.R") # get ROOT
-} else if (wd_parent == "Scripts") { 
-  # if current wd is /National_Warming_Contributions/Scripts/
-  source("./SETUP.R") # get ROOT
+while (!(wd_parent == "National_Warming_Contributions")){
+  setwd("..")
+  wd_parent <- str_split(getwd(), "/")[[1]]
+  wd_parent <- wd_parent[length(wd_parent)]
 }
+source("./Scripts/SETUP.R")
 setwd(ROOT)
 
 #//////////////////////////////////////////////////////////////////////////////#
@@ -27,12 +26,15 @@ setwd(ROOT)
 # Set Output Directory
 INDIR <- paste0(ROOT, "Output/EMISSIONS/")
 OUTDIR <- paste0(ROOT, "Output/EMISSIONS/")
+if (!dir.exists(OUTDIR)) {
+  dir.create(OUTDIR, recursive=TRUE)
+}
 
 #//////////////////////////////////////////////////////////////////////////////#
 #### LOAD DATASETS ####
 #//////////////////////////////////////////////////////////////////////////////#
 
-df_EMISSIONS_CUMULATIVE <- read.csv(paste0(INDIR, "EMISSIONS_CUMULATIVE_merged_input.csv"))
+df_EMISSIONS_CUMULATIVE <- read.csv(paste0(INDIR, "EMISSIONS_CUMULATIVE_ref", ref_year, "_merged_input.csv"))
 
 #//////////////////////////////////////////////////////////////////////////////#
 #### CALCULATE CO2e for N2O USING GWP100 APPROACH ####
@@ -174,5 +176,5 @@ rm(df_EMISSIONS_CUMULATIVE.3GHG)
 df_EMISSIONS_CUMULATIVE$Unit = "PgCO2e"
 
 write.csv(df_EMISSIONS_CUMULATIVE,
-          paste0(OUTDIR, "EMISSIONS_CUMULATIVE_CO2e100_GWPstar.csv"),
+          paste0(OUTDIR, "EMISSIONS_CUMULATIVE_ref", ref_year, "_CO2e100_GWPstar.csv"),
           row.names = F)

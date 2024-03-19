@@ -15,16 +15,15 @@ library(ggpubr)
 
 wd_parent <- str_split(getwd(), "/")[[1]]
 wd_parent <- wd_parent[length(wd_parent)]
-if (wd_parent == "National_Warming_Contributions") {
-  # if current wd is /National_Warming_Contributions/
-  source("./Scripts/SETUP.R") # get ROOT
-} else if (wd_parent == "Scripts") { 
-  # if current wd is /National_Warming_Contributions/Scripts/
-  source("./SETUP.R") # get ROOT
+while (!(wd_parent == "National_Warming_Contributions")){
+  setwd("..")
+  wd_parent <- str_split(getwd(), "/")[[1]]
+  wd_parent <- wd_parent[length(wd_parent)]
 }
+source("./Scripts/SETUP.R")
 setwd(ROOT)
 
-source(paste0(ROOT, "Scripts/HELPERS.R"))
+source(paste0(ROOT, "../Scripts/HELPERS.R"))
 
 ####
 # Prep
@@ -34,6 +33,9 @@ source(paste0(ROOT, "Scripts/HELPERS.R"))
 
 INDIR <- paste0(ROOT, "Output/EMISSIONS/")
 OUTDIR <- paste0(ROOT, "Output/PLOTS/")
+if (!dir.exists(OUTDIR)) {
+  dir.create(OUTDIR, recursive=TRUE)
+}
 
 # Constants
 fixed_gas_order_ANNUAL <- fixed_gas_order[!grepl('3-GHG', fixed_gas_order)] # Cannot combine annual CH4 with N2O and CO2
@@ -45,7 +47,7 @@ fixed_gas_unit_order_CUMULATIVE <- fixed_gas_unit_order_CUMULATIVE
 #### Load Emissions Data ####
 #//////////////////////////////////////////////////////////////////////////////#
 
-df_EMISSIONS <- read.csv(paste0(INDIR, "EMISSIONS_merged_input.csv"))
+df_EMISSIONS <- read.csv(paste0(INDIR, "EMISSIONS_ref", ref_year, "_merged_input.csv"))
 
 df_EMISSIONS <- df_EMISSIONS %>% subset(ISO3 %in% fixed_ISO3s)
 
@@ -79,7 +81,7 @@ df_EMISSIONS_CUMULATIVE <- df_EMISSIONS_CUMULATIVE %>%
   subset(ISO3 %in% fixed_ISO3s)
 
 # Append CO2e Emissions Data
-df_EMISSIONS_CUMULATIVE_CO2e <- read.csv(paste0(INDIR, "EMISSIONS_CUMULATIVE_CO2e100_GWPstar.csv"))
+df_EMISSIONS_CUMULATIVE_CO2e <- read.csv(paste0(INDIR, "EMISSIONS_CUMULATIVE_ref", ref_year, "_CO2e100_GWPstar.csv"))
 df_EMISSIONS_CUMULATIVE_CO2e <- df_EMISSIONS_CUMULATIVE_CO2e %>%
   subset(ISO3 %in% fixed_ISO3s & Gas == "3-GHG")
 df_EMISSIONS_CUMULATIVE <- rbind(df_EMISSIONS_CUMULATIVE, df_EMISSIONS_CUMULATIVE_CO2e)
@@ -235,22 +237,22 @@ fig_EMISSIONS_CUMULATIVE
 #### SAVE ####
 #//////////////////////////////////////////////////////////////////////////////#
 
-ggsave(paste0(OUTDIR, "Fig_EMISSIONS.pdf"), 
+ggsave(paste0(OUTDIR, "Fig_EMISSIONS_ref", ref_year,".pdf"), 
        plot = fig_EMISSIONS, device = "pdf",
        height = 25, width = 25, units = "cm",
        dpi = 300)
 
-ggsave(paste0(OUTDIR, "Fig_EMISSIONS.png"),
+ggsave(paste0(OUTDIR, "Fig_EMISSIONS_ref", ref_year,".png"),
        plot = fig_EMISSIONS, device = "png",
        height = 25, width = 25, units = "cm",
        dpi = 300)
 
-ggsave(paste0(OUTDIR, "Fig_EMISSIONS_CUMULATIVE.pdf"),
+ggsave(paste0(OUTDIR, "Fig_EMISSIONS_CUMULATIVE_ref", ref_year,".pdf"),
        plot = fig_EMISSIONS_CUMULATIVE, device = "pdf",
        height = 30, width = 25, units = "cm",
        dpi = 300)
 
-ggsave(paste0(OUTDIR, "Fig_EMISSIONS_CUMULATIVE.png"),
+ggsave(paste0(OUTDIR, "Fig_EMISSIONS_CUMULATIVE_ref", ref_year,".png"),
        plot = fig_EMISSIONS_CUMULATIVE, device = "png",
        height = 30, width = 25, units = "cm",
        dpi = 300)
