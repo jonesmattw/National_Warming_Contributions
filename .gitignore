@@ -12,6 +12,16 @@
 
 # Data files
 *.zip
+*.csv
+*.xlsx
+*.png
+*.pdf
+*.dbf
+*.prj
+*.shp
+*.shx
+*.cpg
+
 
 # Input Data (all to be provided via the Zenodo data repo)
 /Input/

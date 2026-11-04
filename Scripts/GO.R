@@ -27,5 +27,8 @@ source("../Scripts/PLOTTING/PL.2_GMST.R")
 source("../Scripts/PLOTTING/PL.3_contributions_GMST.R")
 if (ref_year %in% c(1850)) {
   source("../Scripts/PLOTTING/PL.4_GMST_maps.R")
+  source("../Scripts/OUTREACH_PLOTTING/Outreach_maps.R")
+  source("../Scripts/OUTREACH_PLOTTING/Outreach_GMST.R")
+  source("../Scripts/OUTREACH_PLOTTING/Outreach_contributions_GMST.R")
 }
 

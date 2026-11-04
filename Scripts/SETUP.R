@@ -1,13 +1,13 @@
 # Set the root directory for the project
-VERSION <- "v2024.1"
+VERSION <- "v2026.1"
 ROOT <- paste0("/Volumes/LaCie8/National_Warming_Contributions/", VERSION, "/")
 
 # 2023-09-22_GCB2023v23_MtCO2_flat.csv
 
 # Set the start year 
-ref_year <- 1992
+ref_year <- 1991 #Usually 1850 or 1991
 start_year <- ref_year - 20 # 20 prior years required for the GWP* calculation for methane
-final_year <- 2023
+final_year <- 2025
 
 # Set the TCRE value (express in unit °C per PgC)
 # e.g. 1.65°C per 1000 PgC = 1.65 e-3 °C per PgC

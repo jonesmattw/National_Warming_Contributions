@@ -38,7 +38,7 @@ df_GCP_CNTR_ISO3_CODES <- read_excel(paste0(ROOT, "Input/CNTR_ISO3_CODES.xlsx"),
 #### Load FF CO2 data ####
 #//////////////////////////////////////////////////////////////////////////////#
 
-df_CO2ff <- read.csv(paste0(INDIR, "CO2/2023-11-20_GCB2023v36_MtCO2_flat.csv"))
+df_CO2ff <- read.csv(paste0(INDIR, "CO2/GCB2026v11_MtCO2_flat.csv"))
 df_CO2ff <- df_CO2ff %>% select(c(Country, Year, Total))
 colnames(df_CO2ff)[1] <- "CNTR_NAME"
 
@@ -95,7 +95,7 @@ colnames(df_CO2ff)[which(colnames(df_CO2ff) == "PgCO2")] = "Data"
 #//////////////////////////////////////////////////////////////////////////////#
 
 # Load data
-file = paste0(INDIR, "CO2/2023-11-21_GCB2023_ELUC_net_country-level_1850-2022_with-peat_with-quality-flags_v4.xlsx")
+file = paste0(INDIR, "CO2/2026-10-12_GCB2026_ELUC_net_country-level_1850-2025_with-peat_v2.xlsx")
 sheets <- excel_sheets(file) 
 df_CO2luc <- lapply(
   setNames(sheets, sheets), function(x) read_excel(file, sheet=x)) 
@@ -274,7 +274,7 @@ colnames(df_CO2luc)[which(colnames(df_CO2luc) == "PgCO2")] = "Data"
 #### Load FF CH4 data - VERSION >= v2023.2 ####
 #//////////////////////////////////////////////////////////////////////////////#
 
-df_CH4ff <- read.csv(paste0(INDIR, "CH4/Guetschow_et_al_2024-PRIMAP-hist_v2.5.1_final_no_rounding_27-Feb-2024.csv"))
+df_CH4ff <- read.csv(paste0(INDIR, "CH4/Guetschow_et_al_2026-PRIMAP-hist_v2.8_final_no_rounding_22-Sep-2026.csv"))
 
 # Select category M.0.EL ( = National Total excluding LULUCF)
 # and M.AG (agriculture) emissions (which will soon be subtracted from M.0.EL)
@@ -427,7 +427,7 @@ colnames(df_CH4ff)[which(colnames(df_CH4ff) == "TgCH4")] = "Data"
 #### Load LUC CH4 data - VERSION >= v2023.2 ####
 #//////////////////////////////////////////////////////////////////////////////#
 
-df_CH4luc <- read.csv(paste0(INDIR, "CH4/Guetschow_et_al_2024-PRIMAP-hist_v2.5.1_final_no_rounding_27-Feb-2024.csv"))
+df_CH4luc <- read.csv(paste0(INDIR, "CH4/Guetschow_et_al_2026-PRIMAP-hist_v2.8_final_no_rounding_22-Sep-2026.csv"))
 
 # Select category M.0.EL ( = National Total excluding LULUCF)
 # and M.AG (agriculture) emissions (which will soon be subtracted from M.0.EL)
@@ -563,7 +563,7 @@ colnames(df_CH4luc)[which(colnames(df_CH4luc) == "TgCH4")] = "Data"
 #### Load FF N2O data - VERSION >= v2023.2 ####
 #//////////////////////////////////////////////////////////////////////////////#
   
-df_N2Off <- read.csv(paste0(INDIR, "N2O/Guetschow_et_al_2024-PRIMAP-hist_v2.5.1_final_no_rounding_27-Feb-2024.csv"))
+df_N2Off <- read.csv(paste0(INDIR, "N2O/Guetschow_et_al_2026-PRIMAP-hist_v2.8_final_no_rounding_22-Sep-2026.csv"))
 
 # Select category M.0.EL ( = National Total excluding LULUCF)
 # and M.AG (agriculture) emissions (which will soon be subtracted from M.0.EL)
@@ -716,7 +716,7 @@ colnames(df_N2Off)[which(colnames(df_N2Off) == "TgN2O")] = "Data"
 #### Load LUC N2O data - VERSION >= v2023.2 ####
 #//////////////////////////////////////////////////////////////////////////////#
   
-df_N2Oluc <- read.csv(paste0(INDIR, "N2O/Guetschow_et_al_2024-PRIMAP-hist_v2.5.1_final_no_rounding_27-Feb-2024.csv"))
+df_N2Oluc <- read.csv(paste0(INDIR, "N2O/Guetschow_et_al_2026-PRIMAP-hist_v2.8_final_no_rounding_22-Sep-2026.csv"))
 
 # Select category M.0.EL ( = National Total excluding LULUCF)
 # and M.AG (agriculture) emissions (which will soon be subtracted from M.0.EL)
